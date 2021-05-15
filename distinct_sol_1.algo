@@ -1,0 +1,43 @@
+
+ALGORITHM sol2_overlapping 
+VAR
+   htab : HASH_TABLE<INTEGER,INTEGER>;
+ tab1:ARRAY_OF INTEGER[10];
+   tab2:ARRAY_OF INTEGER[10];
+   sum:INTEGER:=0;
+   count:INTEGER:=0;
+   key:INTEGER;
+BEGIN
+
+   READ(tab1)
+  READ(tab2)
+FOR i FROM 0 TO tab1.length STEP 1  DO
+  
+  IF (htab.lookup(tab1[i])=true) THEN
+   count:=htab.get(tab1[i])
+   count:=count+1;
+   htab.insert(tab1[i],count)
+  ELSE
+  htab.insert(tab1[i],1)
+  END_IF
+  END_FOR  
+
+
+  FOR i FROM 0 TO tab2.length STEP 1  DO
+  
+  IF (htab.lookup(tab2[i])=true) THEN
+   count:=htab.get(tab2[i])
+   count:=count+1;
+   htab.insert(tab2[i],count)
+  ELSE
+  htab.insert(tab2[i],1)
+  END_IF
+  END_FOR   
+
+FOR key in htabl 
+ IF(htab.get(key)=1) THEN
+sum :=sum+ (key * htab.get(key))
+END_IF
+END_FOR
+
+END

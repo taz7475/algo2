@@ -1,0 +1,50 @@
+ALGORITHM sum_of_overlapping
+VAR
+    sum:INTEGER:=0;
+    i,j,k,l,y:INTEGER;
+    tab1 ARRAY_OF INTEGER [5] ;
+    tab2 : ARRAY_OF INTEGER[5];
+    tab3:ARRAY_OF INTEGER[5];
+    exisit:BOOLEAN:=false;
+BEGIN
+  READ(tab1)
+  READ(tab2)
+FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+    exist:=false;
+    y=i+1;
+    
+    IF(y<>tab1.length-1)
+    FOR k FROM  y TO tab1.length-1 STEP 1 DO //see if it exist in tab1 OTHER TIME
+     
+     
+     
+      IF(tab1[i]=tab1[y]) THEN
+       exist=true;
+       BREAK;
+       END_IF
+    END_FOR
+    END_IF
+    IF(exist=false)
+      FOR l FROM 0 TO tab3.length -1 STEP 1  DO  //see if it exist in tab3 THAT where we STOCK THE PREVIOUS ELEMENT
+              IF ((tab3[l]= tab1[i])  THEN  //IF WE didn't use tab3 and we have table like[3,2,3]
+               exist:=true;                 //at i =2 tab1[2] we didn't see the   tab1[0] so for that we use tab3
+               BREAK;
+               END_IF
+      END_FOR  
+          IF((l=tab3.length-1)AND(exist=false))
+              tab3[tab3.length]=tab1[i]
+          END_IF
+    END_IF 
+    IF(exist=false) THEN
+    FOR j FROM 0 TO tab2.length-1 STEP 1  DO //see
+    IF(tab1[i]=tab2[j])THEN
+    exist=true;
+    BREAK;
+    END_IF
+    END_FOR
+    END_IF 
+    IF(exist=false) THEN
+    sum:=sum+tab1[i];
+    END_IF
+END_FOR
+END

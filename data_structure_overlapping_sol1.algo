@@ -1,0 +1,61 @@
+ALGORITHM sum_of_overlapping
+VAR
+    sum:INTEGER:=0;
+    i,j,k:INTEGER;
+    count:INTEGER:=0;
+    tab1 ARRAY_OF INTEGER [5] ;
+    tab2 : ARRAY_OF INTEGER[5];
+    tab3:ARRAY_OF INTEGER[5];
+    exisit:BOOLEAN:=false;
+BEGIN
+
+//if we have a tab1 [3,2,3,7]
+ // and we have tab2 [3,5,0,3,1,3] 
+//tab[0] don't exist we add it to tab3 
+//exisit still  false we enter to the for loop 
+//
+//we add it once we have the  sum=3
+//if we find it in table2 we do  sum:=sum+tab2[0]=6 we find it again at at j=3 the sum will be 9
+//we find it again at j=5 the sum will be 12
+//we return to the main for at i=1  count =:0 and exist =:false we enter to the second for loop
+//nothing will be happennig 
+//we are now at  i=2
+//we will find it in tab3 exisit will be true and the sum will be  sum:=sum+tab[i]=15
+
+
+
+  READ(tab1)
+  READ(tab2)
+
+FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        count:=0 ;
+        exist:=false;
+      FOR k FROM 0 TO tab3.length -1 STEP 1  DO
+            IF(tab3[k]= tab1[i]) THEN
+               exist:=true;
+              sum:=sum+tab1[i];
+            END_IF
+      END_FOR    
+                IF ((k=tab3.length-1)AND(exist=false))THEN
+              tab3[tab3.length]=tab1[i]
+                  
+              END_IF
+       
+    IF(exist=false) THEN
+    FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+    IF(tab1[i]=tab2[j]) THEN
+        IF(count<1) THEN
+         sum:=sum+tab2[j];
+          count=count+1;
+          END_IF
+        sum :=sum + tab2[j]
+    END_IF
+    END_FOR     
+    END_IF    
+END_FOR
+
+END
+
+
+
+  
